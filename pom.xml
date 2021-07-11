@@ -5,7 +5,7 @@
     <groupId>com.gxmafeng.service</groupId>
     <artifactId>parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.3-SNAPSHOT</version>
+    <version>1.0.4-SNAPSHOT</version>
     <name>service-parent</name>
     <description>服务父POM</description>
     <properties>
@@ -24,8 +24,6 @@
             "2020.0.4-SNAPSHOT": "Spring Boot >=2.5.3-SNAPSHOT"
         }
         进行设定 -->
-
-        <service-common.version>0.0.1-SNAPSHOT</service-common.version>
         <mysql-connector.version>8.0.25</mysql-connector.version>
         <spring-boot.version>2.5.2</spring-boot.version>
         <spring-cloud.version>2020.0.3</spring-cloud.version>
@@ -33,7 +31,7 @@
         <jooq.version>3.14.11</jooq.version>
         <gson.version>2.8.7</gson.version>
         <nimbus-jose-jwt.version>9.10</nimbus-jose-jwt.version>
-
+        <spring-security.version>5.5.1</spring-security.version>
         <!-- Spring 自家但上述列表未列出的依赖 -->
 
         <spring-security-jwt.version>1.1.1.RELEASE</spring-security-jwt.version>
@@ -41,9 +39,9 @@
         <junit.version>4.13.2</junit.version>
 
         <!-- 以下为自由发挥的版本设定 -->
-        <swagger.version>2.9.2</swagger.version>
+        <swagger.version>3.0.0</swagger.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-        <druid.version>2.0.1-RELEASE</druid.version>
+        <druid.version>1.2.6</druid.version>
         <jacoco-maven-plugin.version>0.8.7</jacoco-maven-plugin.version>
         <yaml-properties-maven-plugin.version>1.1.4</yaml-properties-maven-plugin.version>
         <jjwt.version>0.9.1</jjwt.version>
@@ -108,13 +106,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- 引入 service-common -->
-            <dependency>
-                <groupId>com.gxmafeng.service</groupId>
-                <artifactId>service-common</artifactId>
-                <version>${service-common.version}</version>
-            </dependency>
-
             <!-- junit -->
             <dependency>
                 <groupId>junit</groupId>
@@ -122,16 +113,10 @@
                 <version>${junit.version}</version>
             </dependency>
 
-            <!-- swagger2 -->
+            <!-- swagger3 -->
             <dependency>
                 <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger2</artifactId>
-                <version>${swagger.version}</version>
-            </dependency>
-            <!-- swagger2 ui -->
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger-ui</artifactId>
+                <artifactId>springfox-boot-starter</artifactId>
                 <version>${swagger.version}</version>
             </dependency>
             <!-- druid -->
@@ -140,18 +125,31 @@
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
             <!--JOOQ 代码生成 start-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-jooq</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.jooq</groupId>
                 <artifactId>jooq</artifactId>
+                <version>${jooq.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.jooq</groupId>
                 <artifactId>jooq-meta</artifactId>
+                <version>${jooq.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.jooq</groupId>
                 <artifactId>jooq-codegen</artifactId>
+                <version>${jooq.version}</version>
             </dependency>
             <!--JOOQ end-->
 
@@ -168,6 +166,24 @@
                 <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-aop</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-thymeleaf</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-jpa</artifactId>
+                <version>${spring-boot.version}</version>
             </dependency>
 
             <!--  Spring Cloud-->
@@ -189,6 +205,21 @@
                 <groupId>org.springframework.security.oauth.boot</groupId>
                 <artifactId>spring-security-oauth2-autoconfigure</artifactId>
             </dependency>
+
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-cas</artifactId>
+                <version>${spring-security.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-devtools</artifactId>
+                <version>${spring-boot.version}</version>
+                <optional>true</optional>
+                <scope>runtime</scope>
+            </dependency>
+
 
             <dependency>
                 <groupId>com.nimbusds</groupId>
@@ -256,6 +287,11 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+                <configuration>
+                    <!--fork:如果没有该项配置,整个devtools不会起作用-->
+                    <fork>true</fork>
+                </configuration>
             </plugin>
             <!-- 用于加载application.yml信息，在pom文件可读取到application-???.yml中信息 -->
             <plugin>
