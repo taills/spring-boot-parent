@@ -39,6 +39,7 @@
         <junit.version>4.13.2</junit.version>
 
         <!-- 以下为自由发挥的版本设定 -->
+        <slf4j.version>1.7.31</slf4j.version>
         <swagger.version>3.0.0</swagger.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <druid.version>1.2.6</druid.version>
@@ -106,6 +107,11 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-simple</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
             <!-- junit -->
             <dependency>
                 <groupId>junit</groupId>
