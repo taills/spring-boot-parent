@@ -5,7 +5,7 @@
     <groupId>com.gxmafeng.service</groupId>
     <artifactId>parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.4-SNAPSHOT</version>
+    <version>1.0.4</version>
     <name>service-parent</name>
     <description>服务父POM</description>
     <properties>
