@@ -52,12 +52,12 @@
     <distributionManagement>
         <repository>
             <id>maven-releases</id>
-            <name>驰逸科技 maven 私服 release 仓库</name>
+            <name>码峰科技 maven 私服 release 仓库</name>
             <url>http://10.250.250.48:8081/repository/maven-releases/</url>
         </repository>
         <snapshotRepository>
             <id>maven-snapshots</id>
-            <name>驰逸科技 maven 私服 snapshot 仓库</name>
+            <name>码峰科技 maven 私服 snapshot 仓库</name>
             <url>http://10.250.250.48:8081/repository/maven-snapshots/</url>
             <uniqueVersion>false</uniqueVersion>
         </snapshotRepository>
