@@ -7,9 +7,21 @@
     <packaging>pom</packaging>
     <version>1.0.5-SNAPSHOT</version>
     <name>service-parent</name>
-    <description>服务父POM</description>
+    <description>MF Service Parent</description>
     <properties>
         <java.version>1.8</java.version>
+
+        <nexus.baseurl>http://10.250.250.48:8081</nexus.baseurl>
+        <nexus.baseurl-upload>${nexus.baseurl}</nexus.baseurl-upload>
+
+        <snapshot.repositoryId>maven-snapshots</snapshot.repositoryId>
+        <snapshot.repo.url>${nexus.baseurl-upload}/repository/${snapshot.repositoryId}</snapshot.repo.url>
+
+        <release.repositoryId>maven-releases</release.repositoryId>
+        <release.repo.url>${nexus.baseurl-upload}/repository/${release.repositoryId}</release.repo.url>
+
+        <public.repositoryId>maven-public</public.repositoryId>
+        <public.repo.url>${nexus.baseurl-upload}/repository/${public.repositoryId}</public.repo.url>
 
         <!-- 以下依赖版本严格参照
         https://docs.spring.io/spring-boot/docs/2.2.3.RELEASE/reference/htmlsingle/#dependency-versions-coordinates
@@ -25,7 +37,7 @@
         }
         进行设定 -->
         <mysql-connector.version>8.0.25</mysql-connector.version>
-        <spring-boot.version>2.5.2</spring-boot.version>
+        <spring-boot.version>2.5.5</spring-boot.version>
         <spring-cloud.version>2020.0.3</spring-cloud.version>
         <flyway.version>7.7.3</flyway.version>
         <jooq.version>3.14.11</jooq.version>
@@ -51,14 +63,14 @@
 
     <distributionManagement>
         <repository>
-            <id>maven-releases</id>
-            <name>驰逸科技 maven 私服 release 仓库</name>
-            <url>http://10.250.250.48:8081/repository/maven-releases/</url>
+            <id>${release.repositoryId}</id>
+            <name>MF Releases</name>
+            <url>${release.repo.url}</url>
         </repository>
         <snapshotRepository>
-            <id>maven-snapshots</id>
-            <name>驰逸科技 maven 私服 snapshot 仓库</name>
-            <url>http://10.250.250.48:8081/repository/maven-snapshots/</url>
+            <id>${snapshot.repositoryId}</id>
+            <name>MF Snapshots</name>
+            <url>${snapshot.repo.url}</url>
             <uniqueVersion>false</uniqueVersion>
         </snapshotRepository>
     </distributionManagement>
@@ -70,9 +82,9 @@
 
     <repositories>
         <repository>
-            <id>maven-public</id>
-            <name>码峰科技 maven 私服 综合 仓库</name>
-            <url>http://10.250.250.48:8081/repository/maven-public/</url>
+            <id>${public.repositoryId}</id>
+            <name>MF Public</name>
+            <url>${public.repo.url}</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
@@ -84,9 +96,9 @@
 
     <pluginRepositories>
         <pluginRepository>
-            <id>maven-public</id>
-            <name>码峰科技 maven 私服 综合 仓库</name>
-            <url>http://10.250.250.48:8081/repository/maven-public/</url>
+            <id>${public.repositoryId}</id>
+            <name>MF Public</name>
+            <url>${public.repo.url}</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
