@@ -2,14 +2,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.gxmafeng.service</groupId>
+    <groupId>com.gxmafeng</groupId>
     <artifactId>parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.5-SNAPSHOT</version>
-    <name>service-parent</name>
+    <version>1.1-SNAPSHOT</version>
+    <name>MF Service Parent</name>
     <description>MF Service Parent</description>
     <properties>
         <java.version>1.8</java.version>
+        <common.version>1.0-SNAPSHOT</common.version>
 
         <nexus.baseurl>http://10.250.250.48:8081</nexus.baseurl>
         <nexus.baseurl-upload>${nexus.baseurl}</nexus.baseurl-upload>
@@ -40,7 +41,6 @@
         <spring-boot.version>2.5.5</spring-boot.version>
         <spring-cloud.version>2020.0.3</spring-cloud.version>
         <flyway.version>7.7.3</flyway.version>
-        <jooq.version>3.14.11</jooq.version>
         <gson.version>2.8.7</gson.version>
         <nimbus-jose-jwt.version>9.10</nimbus-jose-jwt.version>
         <spring-security.version>5.5.1</spring-security.version>
@@ -54,11 +54,11 @@
         <slf4j.version>1.7.31</slf4j.version>
         <swagger.version>3.0.0</swagger.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-        <druid.version>1.2.6</druid.version>
+
         <jacoco-maven-plugin.version>0.8.7</jacoco-maven-plugin.version>
-        <yaml-properties-maven-plugin.version>1.1.4</yaml-properties-maven-plugin.version>
+
         <jjwt.version>0.9.1</jjwt.version>
-        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+
     </properties>
 
     <distributionManagement>
@@ -119,6 +119,13 @@
 
     <dependencyManagement>
         <dependencies>
+
+            <dependency>
+                <groupId>com.gxmafeng.common</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${common.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-simple</artifactId>
@@ -137,39 +144,6 @@
                 <artifactId>springfox-boot-starter</artifactId>
                 <version>${swagger.version}</version>
             </dependency>
-            <!-- druid -->
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>druid-spring-boot-starter</artifactId>
-                <version>${druid.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>druid</artifactId>
-                <version>${druid.version}</version>
-            </dependency>
-            <!--JOOQ 代码生成 start-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-jooq</artifactId>
-                <version>${spring-boot.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.jooq</groupId>
-                <artifactId>jooq</artifactId>
-                <version>${jooq.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.jooq</groupId>
-                <artifactId>jooq-meta</artifactId>
-                <version>${jooq.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.jooq</groupId>
-                <artifactId>jooq-codegen</artifactId>
-                <version>${jooq.version}</version>
-            </dependency>
-            <!--JOOQ end-->
 
             <dependency>
                 <groupId>org.flywaydb</groupId>
@@ -311,39 +285,6 @@
                     <fork>true</fork>
                 </configuration>
             </plugin>
-            <!-- 用于加载application.yml信息，在pom文件可读取到application-???.yml中信息 -->
-            <plugin>
-                <groupId>com.pro-crafting.maven</groupId>
-                <artifactId>yaml-properties-maven-plugin</artifactId>
-                <version>${yaml-properties-maven-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>read-project-properties</goal>
-                        </goals>
-                        <configuration>
-                            <files>
-                                <!-- 先读 application.yml ，再用 application-${spring.profiles.active}.yml 去覆盖-->
-                                <file>src/main/resources/application.yml</file>
-                                <file>src/main/resources/application-${spring.profiles.active}.yml</file>
-                            </files>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <!-- 传递maven变量到系统变量里  -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven-surefire-plugin.version}</version>
-                <configuration>
-                    <runOrder>alphabetical</runOrder>
-                    <systemPropertyVariables>
-                        <spring.profiles.active>${spring.profiles.active}</spring.profiles.active>
-                    </systemPropertyVariables>
-                </configuration>
-            </plugin>
 
             <plugin>
                 <groupId>org.jacoco</groupId>
@@ -371,60 +312,6 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>${flyway.version}</version>
             </plugin>
-
-            <plugin>
-                <groupId>org.jooq</groupId>
-                <artifactId>jooq-codegen-maven</artifactId>
-                <version>${jooq.version}</version>
-            </plugin>
-
         </plugins>
     </build>
-
-    <profiles>
-        <!--默认 开发环境-->
-        <profile>
-            <id>dev</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <spring.profiles.active>dev</spring.profiles.active>
-            </properties>
-        </profile>
-
-        <!--CI 环境-->
-        <profile>
-            <id>ci</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <properties>
-                <spring.profiles.active>ci</spring.profiles.active>
-            </properties>
-        </profile>
-
-        <!--预发布环境-->
-        <profile>
-            <id>prerelease</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <properties>
-                <spring.profiles.active>prerelease</spring.profiles.active>
-            </properties>
-        </profile>
-        <!--生产环境-->
-        <profile>
-            <id>prod</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <properties>
-                <spring.profiles.active>prod</spring.profiles.active>
-            </properties>
-        </profile>
-
-    </profiles>
-
 </project>
