@@ -6,5 +6,5 @@ build:
     - Shell
   script:
     - pwd
-    - mvn clean package deploy -U
+    - mvn clean package install deploy -U
   allow_failure: false
