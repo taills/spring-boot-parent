@@ -35,22 +35,6 @@
 	</parent>
 ```
 
-## 关于 profile 的说明
-
-
-默认启动的是 `dev` 的配置，对应的配置文件为:
-
-|  配置   | 配置文件  | 
-|  ----  | ----  |
-| dev  | application-dev.yml |
-| ci  | application-ci.yml |
-| prerelease  | application-prerelease.yml |
-| prod  | application-prod.yml |
-
-
-![Intellij IDEA 示例](readme/idea-active-profile.png)
-
-
 ## 版本升级
 ```bash
 mvn versions:set -DnewVersion=1.0.2-SNAPSHOT
