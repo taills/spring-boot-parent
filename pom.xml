@@ -123,16 +123,8 @@
         </dependency>
     </dependencies>
 
-
     <dependencyManagement>
         <dependencies>
-
-            <dependency>
-                <groupId>com.gxmafeng.common</groupId>
-                <artifactId>druid-spring-boot-starter</artifactId>
-                <version>${common.version}</version>
-            </dependency>
-
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-simple</artifactId>
