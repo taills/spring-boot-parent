@@ -27,7 +27,7 @@
 把它改为以下的即可
 
 ```xml
-    <parent>
+<parent>
     <groupId>com.gxmafeng</groupId>
     <artifactId>parent</artifactId>
     <version>1.1.0</version>
