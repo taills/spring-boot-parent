@@ -27,12 +27,12 @@
 把它改为以下的即可
 
 ```xml
-	<parent>
-		<groupId>com.gxmafeng.service</groupId>
-		<artifactId>parent</artifactId>
-		<version>1.0.0</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
+    <parent>
+    <groupId>com.gxmafeng</groupId>
+    <artifactId>parent</artifactId>
+    <version>1.1.0</version>
+    <relativePath/> <!-- lookup parent from repository -->
+</parent>
 ```
 
 ## 版本升级
