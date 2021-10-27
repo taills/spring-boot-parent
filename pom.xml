@@ -5,12 +5,12 @@
     <groupId>com.gxmafeng</groupId>
     <artifactId>parent</artifactId>
     <packaging>pom</packaging>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.1.0</version>
     <name>MF Service Parent</name>
     <description>MF Service Parent</description>
     <properties>
         <java.version>1.8</java.version>
-        <common.version>1.0-SNAPSHOT</common.version>
+        <common.version>1.0.1</common.version>
 
         <nexus.baseurl>http://10.250.250.48:8081</nexus.baseurl>
         <nexus.baseurl-upload>${nexus.baseurl}</nexus.baseurl-upload>
@@ -43,7 +43,7 @@
         <flyway.version>7.7.3</flyway.version>
         <gson.version>2.8.7</gson.version>
         <nimbus-jose-jwt.version>9.10</nimbus-jose-jwt.version>
-        <spring-security.version>5.5.1</spring-security.version>
+        <spring-security.version>5.5.2</spring-security.version>
         <!-- Spring 自家但上述列表未列出的依赖 -->
 
         <spring-security-jwt.version>1.1.1.RELEASE</spring-security-jwt.version>
@@ -52,12 +52,19 @@
 
         <!-- 以下为自由发挥的版本设定 -->
         <slf4j.version>1.7.31</slf4j.version>
-        <swagger.version>3.0.0</swagger.version>
+        <swagger3.version>3.0.0</swagger3.version>
+        <swagger2.version>2.10.5</swagger2.version>
+        <swagger-bootstrap-ui.version>1.9.6</swagger-bootstrap-ui.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
 
         <jacoco-maven-plugin.version>0.8.7</jacoco-maven-plugin.version>
 
         <jjwt.version>0.9.1</jjwt.version>
+
+        <commons-lang3.version>3.12.0</commons-lang3.version>
+
+        <guava.version>31.0.1-jre</guava.version>
+
 
     </properties>
 
@@ -142,7 +149,7 @@
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-boot-starter</artifactId>
-                <version>${swagger.version}</version>
+                <version>${swagger3.version}</version>
             </dependency>
 
             <dependency>
@@ -249,6 +256,12 @@
                 <version>${gson.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
             <!-- spring-security-rsa -->
             <dependency>
                 <groupId>org.springframework.security</groupId>
@@ -256,6 +269,11 @@
                 <version>${spring-security-rsa.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
