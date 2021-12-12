@@ -3,6 +3,9 @@ stages:
   - release
 build:
   stage: build
+  only:
+    - master
+    - /^dev[0-9]+(?:.[0-9]+)+$/
   tags:
     - Shell
   script:
