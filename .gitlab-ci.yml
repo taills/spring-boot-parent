@@ -6,12 +6,13 @@ build:
   only:
     - master
     - /^dev[0-9]+(?:.[0-9]+)+$/
+  except:
+    - tags
   tags:
     - Shell
   script:
     - pwd
     - mvn clean package install deploy -U
-  allow_failure: false
 
 release:
   stage: release
@@ -19,7 +20,6 @@ release:
     - Shell
   only:
     - /^tags-v([0-9]+).([0-9]+).([0-9]+)/
-  allow_failure: false
   script:
     - pwd
     - mvn clean
