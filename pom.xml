@@ -10,17 +10,12 @@
     <description>Taills's Spring Boot App Parent</description>
     <properties>
         <java.version>1.8</java.version>
-        <common.version>1.0.3</common.version>
-
         <nexus.baseurl>http://10.250.250.115</nexus.baseurl>
         <nexus.baseurl-upload>${nexus.baseurl}</nexus.baseurl-upload>
-
         <snapshot.repositoryId>maven-snapshots</snapshot.repositoryId>
         <snapshot.repo.url>${nexus.baseurl-upload}/repository/${snapshot.repositoryId}</snapshot.repo.url>
-
         <release.repositoryId>maven-releases</release.repositoryId>
         <release.repo.url>${nexus.baseurl-upload}/repository/${release.repositoryId}</release.repo.url>
-
         <public.repositoryId>maven-public</public.repositoryId>
         <public.repo.url>${nexus.baseurl-upload}/repository/${public.repositoryId}</public.repo.url>
 
