@@ -3,9 +3,6 @@ stages:
   - release
 build:
   stage: build
-  only:
-    - master
-    - /^dev[0-9]+(?:.[0-9]+)+$/
   except:
     - tags
   tags:
@@ -19,7 +16,7 @@ release:
   tags:
     - Shell
   only:
-    - /^tags-v([0-9]+).([0-9]+).([0-9]+)/
+    - tags
   script:
     - pwd
     - mvn clean
