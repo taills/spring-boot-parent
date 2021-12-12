@@ -20,8 +20,6 @@ release:
   script:
     - pwd
     - mvn clean
-    - V_VER=$(git tag | head -n 1)
-    - VER=${V_VER:1}
-    - echo "准备构建 ${VER}"
-    - mvn versions:set -DnewVersion=$VER -DgenerateBackupPoms=false
+    - echo "准备构建 ${CI_COMMIT_TAG}"
+    - mvn versions:set -DnewVersion=$CI_COMMIT_TAG -DgenerateBackupPoms=false
     - mvn clean package install deploy -U
