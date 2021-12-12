@@ -1,5 +1,6 @@
 stages:
   - build
+  - release
 build:
   stage: build
   tags:
@@ -8,3 +9,19 @@ build:
     - pwd
     - mvn clean package install deploy -U
   allow_failure: false
+
+release:
+  stage: release
+  tags:
+    - Shell
+  only:
+    - /^tags-v([0-9]+).([0-9]+).([0-9]+)/
+  allow_failure: false
+  script:
+    - pwd
+    - mvn clean
+    - V_VER=$(git tag | head -n 1)
+    - VER=${V_VER:1}
+    - echo "准备构建 ${VER}"
+    - mvn versions:set -DnewVersion=$VER -DgenerateBackupPoms=false
+    - mvn clean package install deploy -U
