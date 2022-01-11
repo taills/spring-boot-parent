@@ -18,7 +18,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 8
-        run: mvn versions:set -DnewVersion=${{ steps.get_tag_name.outputs.VERSION }} -DgenerateBackupPoms=false
+
+      -run: mvn versions:set -DnewVersion=${{ steps.get_tag_name.outputs.VERSION }} -DgenerateBackupPoms=false
 
       - name: Maven
         uses: samuelmeuli/action-maven-publish@v1
