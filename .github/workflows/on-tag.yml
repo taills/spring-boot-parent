@@ -18,6 +18,10 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 8
+          server-id: sonatype-nexus-staging
+          server-username: ${{ secrets.nexus_username }}
+          server-password: ${{ secrets.nexus_password }}
+          gpg-passphrase: ${{ secrets.gpg_passphrase }}
 
       - run: mvn versions:set -DnewVersion=${{ steps.get_tag_name.outputs.VERSION }} -DgenerateBackupPoms=false
 
