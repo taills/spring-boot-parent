@@ -12,7 +12,7 @@ jobs:
 
       - name: Get the tag name
         id: get_tag_name
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+        run: echo ::set-output name=TAG_NAME::${GITHUB_REF/refs\/tags\//}
 
       - name: Set up Apache Maven Central
         uses: actions/setup-java@v2
@@ -26,10 +26,17 @@ jobs:
           gpg-passphrase: GPG_PASSPHRASE # env variable for GPG private key passphrase
 
       - name: Set Version
-        run: mvn versions:set -DnewVersion=${{ steps.get_tag_name.outputs.VERSION }} -DgenerateBackupPoms=false
+        run: mvn versions:set -DnewVersion=${{ steps.get_tag_name.outputs.TAG_NAME }} -DgenerateBackupPoms=false
 
       - name: Publish to Apache Maven Central
-        run: mvn clean deploy
+        run: mvn --batch-mode clean deploy
+        env:
+          NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
+          NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+
+      - name: Release
+        run: mvn -B release:prepare-with-pom release:perform
         env:
           NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
           NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
