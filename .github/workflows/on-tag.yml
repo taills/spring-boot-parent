@@ -25,18 +25,11 @@ jobs:
           gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }} # Value of the GPG private key to import
           gpg-passphrase: GPG_PASSPHRASE # env variable for GPG private key passphrase
 
+      - name: Set Version
+        run: mvn versions:set -DnewVersion=${{ steps.get_tag_name.outputs.VERSION }} -DgenerateBackupPoms=false
+        
       - name: Publish to Apache Maven Central
         run: mvn --batch-mode clean deploy -Pdeploy-to-central
-        env:
-          NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
-          NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
-          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-
-      - name: preRelease
-        run: mvn --batch-mode release:clean release:prepare -Dtag=1.2.7 -DreleaseVersion=1.2.7 -Pdeploy-to-central
-
-      - name: Release
-        run: mvn --batch-mode release:perform -Pdeploy-to-central
         env:
           NEXUS_USERNAME: ${{ secrets.NEXUS_USERNAME }}
           NEXUS_PASSWORD: ${{ secrets.NEXUS_PASSWORD }}
