@@ -1,4 +1,4 @@
-name: Tag Push
+name: 标签推送😂
 on:
   push:
     tags:

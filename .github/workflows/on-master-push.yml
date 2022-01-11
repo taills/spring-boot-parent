@@ -1,4 +1,4 @@
-name: Master Push
+name: 主分支推送😄
 on:
   push:
     branches:
