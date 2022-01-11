@@ -10,15 +10,6 @@
     <description>Taills's Spring Boot App Parent</description>
     <properties>
         <java.version>1.8</java.version>
-        <nexus.baseurl>http://10.250.250.115</nexus.baseurl>
-        <nexus.baseurl-upload>${nexus.baseurl}</nexus.baseurl-upload>
-        <snapshot.repositoryId>maven-snapshots</snapshot.repositoryId>
-        <snapshot.repo.url>${nexus.baseurl-upload}/repository/${snapshot.repositoryId}</snapshot.repo.url>
-        <release.repositoryId>maven-releases</release.repositoryId>
-        <release.repo.url>${nexus.baseurl-upload}/repository/${release.repositoryId}</release.repo.url>
-        <public.repositoryId>maven-public</public.repositoryId>
-        <public.repo.url>${nexus.baseurl-upload}/repository/${public.repositoryId}</public.repo.url>
-
         <!-- 以下依赖版本严格参照
         https://docs.spring.io/spring-boot/docs/2.2.3.RELEASE/reference/htmlsingle/#dependency-versions-coordinates
 
@@ -64,16 +55,14 @@
     </properties>
 
     <distributionManagement>
+        <!-- 参考 https://central.sonatype.org/publish/publish-maven/ -->
         <repository>
-            <id>${release.repositoryId}</id>
-            <name>Private Nexus Releases Repository</name>
-            <url>${release.repo.url}</url>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
         <snapshotRepository>
-            <id>${snapshot.repositoryId}</id>
-            <name>Private Nexus Snapshots Repository</name>
-            <url>${snapshot.repo.url}</url>
-            <uniqueVersion>false</uniqueVersion>
+            <id>ossrh</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
 
@@ -81,34 +70,6 @@
         <name>Taills</name>
         <url>https://github.com/taills/</url>
     </organization>
-
-    <repositories>
-        <repository>
-            <id>${public.repositoryId}</id>
-            <name>Private Nexus Server</name>
-            <url>${public.repo.url}</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>${public.repositoryId}</id>
-            <name>Private Nexus Server</name>
-            <url>${public.repo.url}</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
 
     <dependencies>
         <dependency>
