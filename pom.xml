@@ -94,7 +94,7 @@
 
     <scm>
         <url>https://github.com/taills/spring-boot-parent.git</url>
-        <connection>ssh://git@github.com:taills/spring-boot-parent.git</connection>
+        <connection>scm:git:https://github.com/taills/spring-boot-parent.git</connection>
     </scm>
     <url>https://github.com/taills/</url>
     <developers>
@@ -317,7 +317,7 @@
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.7</version>
+                <version>1.6.8</version>
                 <extensions>true</extensions>
                 <configuration>
                     <serverId>ossrh</serverId>
@@ -361,7 +361,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.9.1</version>
+                <version>3.2.0</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -371,7 +371,11 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <additionalparam>-Xdoclint:none</additionalparam>
+                    <show>private</show>
+                    <nohelp>true</nohelp>
+                    <charset>UTF-8</charset>
+                    <encoding>UTF-8</encoding>
+                    <docencoding>UTF-8</docencoding>
                 </configuration>
             </plugin>
 
