@@ -66,11 +66,27 @@
         </snapshotRepository>
     </distributionManagement>
 
-    <organization>
-        <name>Taills</name>
-        <url>https://github.com/taills/</url>
-    </organization>
+    <licenses>
+        <license>
+            <name>Apache 2.0 License</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
+    <scm>
+        <url>https://github.com/taills/spring-boot-parent.git</url>
+        <connection>ssh://git@github.com:taills/spring-boot-parent.git</connection>
+    </scm>
+
+    <developers>
+        <developer>
+            <name>taills</name>
+            <email>taills@qq.com</email>
+            <url>https://github.com/taills/</url>
+        </developer>
+    </developers>
+    
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
