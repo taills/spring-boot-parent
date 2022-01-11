@@ -1,8 +1,8 @@
-name: GitHub Actions On Tag Push
+name: Master Push
 on:
   push:
-    tags:
-      - '*'
+    branches:
+      - master
 jobs:
   build-and-publsh:
     runs-on: ubuntu-latest
@@ -14,21 +14,23 @@ jobs:
         id: get_tag_name
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
 
-      - name: Install Java and Maven
-        uses: actions/setup-java@v1
+      - name: Set up Apache Maven Central
+        uses: actions/setup-java@v2
         with:
-          java-version: 8
-          server-id: sonatype-nexus-staging
-          server-username: ${{ secrets.nexus_username }}
-          server-password: ${{ secrets.nexus_password }}
-          gpg-passphrase: ${{ secrets.gpg_passphrase }}
+          distribution: 'zulu'
+          java-version: '8'
+          cache: 'maven'
+          server-id: ossrh
+          server-username: ${{ secrets.NEXUS_USERNAME }}
+          server-password: ${{ secrets.NEXUS_PASSWORD }}
+          gpg-passphrase: ${{ secrets.GPG_PASSPHRASE }}
+          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
 
       - run: mvn versions:set -DnewVersion=${{ steps.get_tag_name.outputs.VERSION }} -DgenerateBackupPoms=false
 
-      - name: Publish to Maven Central Repo
-        uses: samuelmeuli/action-maven-publish@v1
-        with:
-          gpg_private_key: ${{ secrets.gpg_private_key }}
-          gpg_passphrase: ${{ secrets.gpg_passphrase }}
-          nexus_username: ${{ secrets.nexus_username }}
-          nexus_password: ${{ secrets.nexus_password }}
+      - name: Publish to Apache Maven Central
+        run: mvn clean deploy
+        env:
+          MAVEN_USERNAME: ${{ secrets.NEXUS_USERNAME }}
+          MAVEN_CENTRAL_TOKEN: ${{ secrets.NEXUS_PASSWORD }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
