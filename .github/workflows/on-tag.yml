@@ -26,8 +26,8 @@ jobs:
           gpg-passphrase: GPG_PASSPHRASE # env variable for GPG private key passphrase
 
       - name: Set Version
-        run: mvn versions:set -DnewVersion=${{ steps.get_tag_name.outputs.VERSION }} -DgenerateBackupPoms=false
-        
+        run: mvn versions:set -DnewVersion=${{ steps.get_tag_name.outputs.TAG_NAME }} -DgenerateBackupPoms=false
+
       - name: Publish to Apache Maven Central
         run: mvn --batch-mode clean deploy -Pdeploy-to-central
         env:
