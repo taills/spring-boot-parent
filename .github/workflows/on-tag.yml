@@ -5,7 +5,7 @@ on:
       - '*'
 jobs:
   build-and-publsh:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v2
@@ -21,10 +21,11 @@ jobs:
 
       - run: mvn versions:set -DnewVersion=${{ steps.get_tag_name.outputs.VERSION }} -DgenerateBackupPoms=false
 
-      - name: Maven
+      - name: Publish to Maven Central Repo
         uses: samuelmeuli/action-maven-publish@v1
         with:
           gpg_private_key: ${{ secrets.gpg_private_key }}
           gpg_passphrase: ${{ secrets.gpg_passphrase }}
           nexus_username: ${{ secrets.nexus_username }}
           nexus_password: ${{ secrets.nexus_password }}
+          maven_args: nexus-staging:release
