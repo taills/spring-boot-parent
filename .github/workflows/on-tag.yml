@@ -1,8 +1,8 @@
-name: Master Push
+name: Tag Push
 on:
   push:
-    branches:
-      - master
+    tags:
+      - '*'
 jobs:
   build-and-publsh:
     runs-on: ubuntu-latest
