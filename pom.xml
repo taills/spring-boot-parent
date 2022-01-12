@@ -11,51 +11,42 @@
     <properties>
         <java.version>1.8</java.version>
         <!-- 以下依赖版本严格参照
-        https://docs.spring.io/spring-boot/docs/2.2.3.RELEASE/reference/htmlsingle/#dependency-versions-coordinates
+        https://docs.spring.io/spring-boot/docs/2.6.2.RELEASE/reference/htmlsingle/#dependency-versions-coordinates
 
         spring-cloud 依赖 spring boot 的版本参考 https://start.spring.io/actuator/info
-        spring-cloud": {
+        "spring-cloud": {
             "Hoxton.SR12": "Spring Boot >=2.2.0.RELEASE and <2.4.0.M1",
-            "2020.0.0-M3": "Spring Boot >=2.4.0.M1 and <=2.4.0.M1",
-            "2020.0.0-M4": "Spring Boot >=2.4.0.M2 and <=2.4.0-M3",
-            "2020.0.0": "Spring Boot >=2.4.0.M4 and <=2.4.0",
-            "2020.0.3": "Spring Boot >=2.4.1 and <2.5.3-SNAPSHOT",
-            "2020.0.4-SNAPSHOT": "Spring Boot >=2.5.3-SNAPSHOT"
+            "2020.0.5": "Spring Boot >=2.4.0.M1 and <2.6.0-M1",
+            "2021.0.0-M1": "Spring Boot >=2.6.0-M1 and <2.6.0-M3",
+            "2021.0.0-M3": "Spring Boot >=2.6.0-M3 and <2.6.0-RC1",
+            "2021.0.0-RC1": "Spring Boot >=2.6.0-RC1 and <2.6.1",
+            "2021.0.0": "Spring Boot >=2.6.1 and <2.6.3-SNAPSHOT",
+            "2021.0.1-SNAPSHOT": "Spring Boot >=2.6.3-SNAPSHOT and <2.7.0-M1"
         }
         进行设定 -->
-        <mysql-connector.version>8.0.25</mysql-connector.version>
-        <spring-boot.version>2.5.5</spring-boot.version>
-        <spring-cloud.version>2020.0.3</spring-cloud.version>
-        <flyway.version>7.7.3</flyway.version>
-        <gson.version>2.8.7</gson.version>
+        <mysql-connector.version>8.0.27</mysql-connector.version>
+        <spring-boot.version>2.6.2</spring-boot.version>
+        <spring-cloud.version>2021.0.0</spring-cloud.version>
+        <flyway.version>8.0.5</flyway.version>
+        <gson.version>2.8.9</gson.version>
         <nimbus-jose-jwt.version>9.10</nimbus-jose-jwt.version>
-        <spring-security.version>5.5.2</spring-security.version>
+        <spring-security.version>5.6.2</spring-security.version>
         <!-- Spring 自家但上述列表未列出的依赖 -->
 
         <spring-security-jwt.version>1.1.1.RELEASE</spring-security-jwt.version>
-        <spring-security-rsa.version>1.0.10.RELEASE</spring-security-rsa.version>
+        <spring-security-rsa.version>1.0.11.RELEASE</spring-security-rsa.version>
         <junit.version>4.13.2</junit.version>
 
         <!-- 以下为自由发挥的版本设定 -->
-        <slf4j.version>1.7.31</slf4j.version>
+        <slf4j.version>1.7.32</slf4j.version>
         <swagger3.version>3.0.0</swagger3.version>
-        <swagger2.version>2.10.5</swagger2.version>
-        <swagger-bootstrap-ui.version>1.9.6</swagger-bootstrap-ui.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-
         <jacoco-maven-plugin.version>0.8.7</jacoco-maven-plugin.version>
-
         <jjwt.version>0.9.1</jjwt.version>
-
         <commons-lang3.version>3.12.0</commons-lang3.version>
-
         <guava.version>31.0.1-jre</guava.version>
-
-        <gpg.key>39136EF38292005A</gpg.key>
         <ossrh.release-url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</ossrh.release-url>
         <ossrh.snapshots-url>https://s01.oss.sonatype.org/content/repositories/snapshots</ossrh.snapshots-url>
-
-
     </properties>
 
     <distributionManagement>
