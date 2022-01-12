@@ -28,7 +28,7 @@
 
 ```xml
 <parent>
-    <groupId>com.github.taills</groupId>
+    <groupId>io.github.taills</groupId>
     <artifactId>spring-boot-parent</artifactId>
     <version>1.0.0</version>
     <relativePath/> <!-- lookup parent from repository -->
